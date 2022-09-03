@@ -1,0 +1,173 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Woolworths API"
+host: "prod.mobile-api.woolworths.com.au"
+schemes:
+- "https"
+
+# KaGOqzzJ3ZTjswc62prswRLXCqJ4oepSqtI2P8iM
+securityDefinitions:
+  coles_auth:
+    type: 'apiKey'
+    name: 'X-Api-Key'
+    in: 'header'
+
+paths:
+  '/wow/v3/fulfilment':
+    get:
+      consumes:
+      - 'application/json'
+      produces:
+      - 'application/json'
+      security:
+      - coles_auth: []
+      responses:
+        200:
+          description: Success
+        401:
+          description: Invalid API Key
+        404:
+          description: Missing API Key
+
+  '/wow/v2/addresses/stores':
+    get:
+      consumes:
+      - 'application/json'
+      produces:
+      - 'application/json'
+      parameters:
+      - name: 'latitude'
+        in: 'query'
+        required: false
+        type: 'number'
+      - name: 'longitude'
+        in: 'query'
+        required: false
+        type: 'number'
+      - name: 'postcode'
+        in: 'query'
+        required: false
+        type: 'string'
+      - name: 'storeid'
+        in: 'query'
+        required: false
+        type: 'string'
+      security:
+      - coles_auth: []
+      responses:
+        200:
+          description: Success
+        401:
+          description: Invalid API Key
+        404:
+          description: Missing API Key
+
+  
+
+
+
+# @GET
+# io.reactivex.q<AutoCompleteResponse> B(@Url String str, @QueryMap Map<String, String> map);
+
+# @GET
+# z<SearchResponse> C(@Url String str, @QueryMap Map<String, String> map);
+
+# @POST("wow/v2/lists")
+# z<ShoppingListAddResult> D(@Body NewListWrapper newListWrapper);
+
+# @DELETE("wow/v2/lists/{id}/items")
+# z<ShoppingListDeleteResult> F(@Path("id") String str, @Query("id") int i2, @Query("timestamp") long j2, @Query("lastsynced") long j3);
+
+# @POST("wow/v2/commerce/config")
+# z<ConfigResponse> G(@Body Map<String, String> map);
+
+# @GET("wow/v2/commerce/lists/pastshop")
+# io.reactivex.q<au.com.woolworths.android.onesite.modules.shoppinglists.index.a0.b> H();
+
+# @GET("wow/v2/products/{articleId}?details=true")
+# z<ProductApigeeResult> I(@Path("articleId") String str, @Query("store") String str2);
+
+# @GET("wow/v2/stores?type=suburb")
+# z<au.com.woolworths.android.onesite.modules.storelocator.apis.k> J(@Query("q") String str);
+
+# @GET
+# z<ShoppingListWithIDResult> K(@Url String str);
+
+# @GET("wow/v2/commerce/checkout/haveyouforgotten")
+# z<ProductApigeeResult> L();
+
+# @POST("wow/v2/commerce/signup")
+# z<LoginResult> b(@Body SignUpData signUpData);
+
+# @PUT("wow/v3/lists/{id}/items")
+# z<UpdateListItemsResponse> c(@Path("id") String str, @Body UpdateListItemsRequest updateListItemsRequest);
+
+# @GET("wow/v2/stores/{storeId}")
+# z<StoreLocatorResult.Store> d(@Path("storeId") String str);
+
+# @POST("wow/v3/lists/{id}/clear")
+# z<Object> e(@Path("id") String str, @Body Map<String, String> map);
+
+# @POST("wow/v3/trolley/shopperpreferences")
+# z<Object> f(@Body UpdateRedemptionSettingsData updateRedemptionSettingsData);
+
+# @GET("hermes/iris/v1/pages/home")
+# z<Component<au.com.woolworths.android.onesite.modules.home.l.d>> g(@Header("X-SaleFinder-Store-Id") String str, @Query("store") String str2, @Query("mode") String str3);
+
+# @GET("wow/v2/lists")
+# z<ShoppingListsAllResult> getAllShoppingLists();
+
+# @POST
+# z<TrolleyResult> h(@Url String str, @Body TrolleyUpdateData trolleyUpdateData);
+
+# @GET
+# z<VisualShoppingResult> i(@Url String str, @QueryMap Map<String, String> map);
+
+# @POST
+# z<TrolleyResult> j(@Url String str);
+
+# @PUT("wow/v2/lists/{id}")
+# z<ShoppingListUpdateListResult> k(@Path("id") String str, @Body ShoppingListUpdateData shoppingListUpdateData);
+
+# @PUT("wow/v3/lists/{id}/deleteitems")
+# z<DeleteListItemsResponse> l(@Path("id") String str, @Body DeleteListItemsRequest deleteListItemsRequest);
+
+# @POST("wow/v3/fulfilment")
+# z<Response<au.com.woolworths.android.onesite.modules.d.a.b>> m(@Body au.com.woolworths.android.onesite.modules.d.a.f fVar);
+
+# @GET
+# z<StoreLocatorResult> n(@Url String str);
+
+# @PUT("wow/v2/lists/{id}/items")
+# z<ShoppingListUpdateItemResult> o(@Path("id") String str, @Body ShoppingListItemUpdateData shoppingListItemUpdateData);
+
+# @GET
+# z<NotificationResult> p(@Url String str, @Query("appid") String str2, @Query("deviceid") String str3);
+
+# @GET
+# z<ProductApigeeResult> q(@Url String str, @QueryMap Map<String, String> map);
+
+# @POST("wow/v2/lists/{id}/items")
+# z<ShoppingListItemAddResult> r(@Body Map<String, String> map, @Path("id") String str);
+
+# @GET("wow/v2/products/{barcode}?details=true&type=ean")
+# z<ProductApigeeResult> s(@Path("barcode") String str, @Query("store") String str2);
+
+# @GET
+# z<SpecialsTypes> t(@Url String str, @QueryMap Map<String, String> map);
+
+# @GET("wow/v2/products/{barcode}?details=true&type=ean")
+# z<ProductApigeeResult> u(@Path("barcode") String str, @Query("mode") String str2);
+
+# @DELETE("wow/v2/lists/{id}")
+# z<ShoppingListDeleteResult> v(@Path("id") String str, @Query("timestamp") long j2, @Query("lastsynced") long j3);
+
+# @GET
+# z<TrolleyResult> x(@Url String str, @Query("edr") String str2);
+
+# @GET("wow/v2/products/{articleId}?details=true")
+# z<ProductApigeeResult> y(@Path("articleId") String str, @Query("mode") String str2);
+
+# @GET
+# z<ProductApigeeResult> z(@Url String str);
