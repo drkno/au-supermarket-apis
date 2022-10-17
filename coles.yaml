@@ -3,355 +3,452 @@ openapi: 3.0.1
 info:
   title: Coles API
   version: 1.0.0
-  
+
 servers:
 # dd6ae58532d743978508555a59a199ac
-- url: https://apigw.coles.com.au/digital/colesappbff
-  description: Prod
+  - url: https://apigw.coles.com.au/digital/colesappbff
+    description: Prod
 # b967dc64c42c401d885e39a408e4904f
-- url: https://apigwsvt1.coles.com.au/digital/colesappbff
-  description: SVT
+  - url: https://apigwsvt1.coles.com.au/digital/colesappbff
+    description: SVT
 # 32b349bcd8bb4b0fa0100d0c2a29fe5a
-- url: https://apigwsvt1.coles.com.au/digital/colesappbff
-  description: SIT
+  - url: https://apigwsvt1.coles.com.au/digital/colesappbff
+    description: SIT
 # 99841b986ea1435785399b6c52d12dd8
-- url: https://apigwtest2.coles.com.au/digital/colesappbff
-  description: Test
+  - url: https://apigwtest2.coles.com.au/digital/colesappbff
+    description: Test
 # 6ace83d699eb418f9cd3486d4841e417
-- url: https://apigwdev2.coles.com.au/digital/colesappbff
-  description: Dev
+  - url: https://apigwdev2.coles.com.au/digital/colesappbff
+    description: Dev
 
 paths:
-
   /v2/products/category/{categoryId}:
     get:
       parameters:
-      - name: categoryId
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: storeId
-        in: query
-        schema:
-          $ref: '#/components/schemas/StoreId'
-      - name: purchaseHistory
-        in: query
-        schema:
-          type: integer
-      - name: promotionTypes
-        in: query
-        schema:
-          type: string
-      - name: specialTypes
-        in: query
-        schema:
-          type: string
-      - name: sortBy
-        in: query
-        schema:
-          type: string
-      - name: start
-        in: query
-        schema:
-          type: integer
-      - name: limit
-        in: query
-        schema:
-          type: integer
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: storeId
+          in: query
+          schema:
+            $ref: '#/components/schemas/StoreId'
+        - name: purchaseHistory
+          in: query
+          schema:
+            type: integer
+        - name: promotionTypes
+          in: query
+          schema:
+            type: string
+        - name: specialTypes
+          in: query
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+        - name: start
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-
+        - coles_auth: []
+        
   /v2/products/category:
     get:
       parameters:
-      - name: storeId
-        in: query
-        schema:
-          $ref: '#/components/schemas/StoreId'
-      - name: purchaseHistory
-        in: query
-        schema:
-          type: integer
-      - name: scope
-        in: query
-        schema:
-          type: integer
-      - name: promotionTypes
-        in: query
-        schema:
-          type: string
-      - name: specialTypes
-        in: query
-        schema:
-          type: string
-      - name: sortBy
-        in: query
-        schema:
-          type: string
+        - name: storeId
+          in: query
+          schema:
+            $ref: '#/components/schemas/StoreId'
+        - name: purchaseHistory
+          in: query
+          schema:
+            type: integer
+        - name: scope
+          in: query
+          schema:
+            type: integer
+        - name: promotionTypes
+          in: query
+          schema:
+            type: string
+        - name: specialTypes
+          in: query
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/products/list:
     post:
       parameters:
-      - name: storeId
-        in: query
-        schema:
-          $ref: '#/components/schemas/StoreId'
-      - name: limit
-        in: query
-        schema:
-          type: string
-      - name: start
-        in: query
-        schema:
-          type: integer
+        - name: storeId
+          in: query
+          schema:
+            $ref: '#/components/schemas/StoreId'
+        - name: limit
+          in: query
+          schema:
+            type: string
+        - name: start
+          in: query
+          schema:
+            type: integer
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 type: object
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/products/search/suggestions:
     get:
       parameters:
-      - name: searchTerm
-        in: query
-        schema:
-          type: string
-      - name: storeId
-        in: query
-        schema:
-          $ref: '#/components/schemas/StoreId'
+        - name: searchTerm
+          in: query
+          schema:
+            type: string
+        - name: storeId
+          in: query
+          schema:
+            $ref: '#/components/schemas/StoreId'
       responses:
-        200:
+        '200':
           description: Success
-          content: {}
-        401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchSuggestions'
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/products/{data}:
     get:
       parameters:
-      - name: data
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: storeId
-        in: query
-        schema:
-          $ref: '#/components/schemas/StoreId'
-      - name: type
-        in: query
-        schema:
-          type: string
-          enum:
-          - sku
-          - barcode
+        - name: data
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: storeId
+          in: query
+          schema:
+            $ref: '#/components/schemas/StoreId'
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum:
+              - sku
+              - barcode
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/products/boughtBefore:
     get:
       parameters:
-      - name: storeId
-        in: query
-        schema:
-          $ref: '#/components/schemas/StoreId'
-      - name: historyType
-        in: query
-        schema:
-          type: integer
-      - name: start
-        in: query
-        schema:
-          type: integer
-      - name: limit
-        in: query
-        schema:
-          type: integer
-      - name: sortBy
-        in: query
-        schema:
-          type: string
+        - name: storeId
+          in: query
+          schema:
+            $ref: '#/components/schemas/StoreId'
+        - name: historyType
+          in: query
+          schema:
+            type: integer
+        - name: start
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: sortBy
+          in: query
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/products/search:
     get:
       parameters:
-      - name: searchTerm
-        in: query
-        required: true
-        schema:
-          type: string
-      - name: storeId
-        in: query
-        required: true
-        schema:
-          $ref: '#/components/schemas/StoreId'
-      - name: start
-        in: query
-        required: true
-        schema:
-          type: string
-      - name: limit
-        in: query
-        required: true
-        schema:
-          type: string
-      - name: sortBy
-        in: query
-        schema:
-          type: string
-      - name: productsOfInterest
-        in: query
-        schema:
-          type: string
-      - name: latitude
-        in: query
-        schema:
-          type: string
-      - name: longitude
-        in: query
-        schema:
-          type: string
-      - name: distance
-        in: query
-        schema:
-          type: string
+        - name: searchTerm
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: storeId
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/StoreId'
+        - name: start
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+        - name: productsOfInterest
+          in: query
+          schema:
+            type: string
+        - name: latitude
+          in: query
+          schema:
+            type: string
+        - name: longitude
+          in: query
+          schema:
+            type: string
+        - name: distance
+          in: query
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/stores/{storeId}:
     get:
       parameters:
-      - name: storeId
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/StoreId'
-      - name: brandId
-        in: query
-        schema:
-          $ref: '#/components/schemas/StoreType'
-      - name: nearByStoresDistance
-        in: query
-        schema:
-          type: string
-      - name: porLatitude
-        in: query
-        schema:
-          type: number
-          format: double
-      - name: porLongitude
-        in: query
-        schema:
-          type: number
-          format: double
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/StoreId'
+        - name: brandId
+          in: query
+          schema:
+            $ref: '#/components/schemas/StoreType'
+        - name: nearByStoresDistance
+          in: query
+          schema:
+            type: string
+        - name: porLatitude
+          in: query
+          schema:
+            type: number
+            format: double
+        - name: porLongitude
+          in: query
+          schema:
+            type: number
+            format: double
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Store'
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/stores/search/suggestions:
     get:
       parameters:
-      - name: searchTerm
-        in: query
-        schema:
-          type: string
-      - name: limit
-        in: query
-        schema:
-          type: integer
+        - name: searchTerm
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -373,55 +470,67 @@ paths:
                           type: string
                         state:
                           type: string
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/stores/search:
     get:
       parameters:
-      - name: brandIds
-        in: query
-        style: form
-        explode: false
-        schema:
-          type: array
-          items:
+        - name: brandIds
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: latitude
+          in: query
+          schema:
+            type: string
+        - name: longitude
+          in: query
+          schema:
+            type: string
+        - name: distance
+          in: query
+          schema:
+            type: number
+            format: double
+        - name: numberOfStores
+          in: query
+          schema:
             type: integer
-      - name: latitude
-        in: query
-        schema:
-          type: string
-      - name: longitude
-        in: query
-        schema:
-          type: string
-      - name: distance
-        in: query
-        schema:
-          type: number
-          format: double
-      - name: numberOfStores
-        in: query
-        schema:
-          type: integer
-      - name: porLatitude
-        in: query
-        schema:
-          type: number
-          format: double
-      - name: porLongitude
-        in: query
-        schema:
-          type: number
-          format: double
+        - name: porLatitude
+          in: query
+          schema:
+            type: number
+            format: double
+        - name: porLongitude
+          in: query
+          schema:
+            type: number
+            format: double
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -432,28 +541,40 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Store'
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/stores/status:
     get:
       parameters:
-      - name: storeIds
-        in: query
-        style: form
-        explode: false
-        schema:
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreId'
+        - name: storeIds
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/StoreId'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -469,343 +590,494 @@ paths:
                           $ref: '#/components/schemas/StoreId'
                         status:
                           type: integer
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/configs:
     get:
       parameters:
-      - name: appVersion
-        in: query
-        schema:
-          type: string
-      - name: platformVersion
-        in: query
-        schema:
-          type: string
-      - name: appBuildType
-        in: query
-        schema:
-          type: string
-      - name: timezone
-        in: query
-        schema:
-          type: string
-      - name: appName
-        in: query
-        schema:
-          type: string
-          default: coles
-          enum:
-          - coles
-      - name: platformName
-        in: query
-        schema:
-          type: string
-          default: Android
-          enum:
-          - Android
+        - name: appVersion
+          in: query
+          schema:
+            type: string
+        - name: platformVersion
+          in: query
+          schema:
+            type: string
+        - name: appBuildType
+          in: query
+          schema:
+            type: string
+        - name: timezone
+          in: query
+          schema:
+            type: string
+        - name: appName
+          in: query
+          schema:
+            type: string
+            default: coles
+            enum:
+              - coles
+        - name: platformName
+          in: query
+          schema:
+            type: string
+            default: Android
+            enum:
+              - Android
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/messages:
     get:
       parameters:
-      - name: appVersion
-        in: query
-        schema:
-          type: string
-      - name: platformVersion
-        in: query
-        schema:
-          type: string
-      - name: appBuildType
-        in: query
-        schema:
-          type: string
-      - name: timezone
-        in: query
-        schema:
-          type: string
-      - name: appName
-        in: query
-        schema:
-          type: string
-          default: coles
-          enum:
-          - coles
-      - name: platformName
-        in: query
-        schema:
-          type: string
-          default: Android
-          enum:
-          - Android
+        - name: appVersion
+          in: query
+          schema:
+            type: string
+        - name: platformVersion
+          in: query
+          schema:
+            type: string
+        - name: appBuildType
+          in: query
+          schema:
+            type: string
+        - name: timezone
+          in: query
+          schema:
+            type: string
+        - name: appName
+          in: query
+          schema:
+            type: string
+            default: coles
+            enum:
+              - coles
+        - name: platformName
+          in: query
+          schema:
+            type: string
+            default: Android
+            enum:
+              - Android
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/layout/home:
     get:
       parameters:
-      - name: targetId
-        in: query
-        schema:
-          type: string
-      - name: segment
-        in: query
-        schema:
-          type: string
-      - name: deviceType
-        in: query
-        schema:
-          type: string
+        - name: targetId
+          in: query
+          schema:
+            type: string
+        - name: segment
+          in: query
+          schema:
+            type: string
+        - name: deviceType
+          in: query
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/loyalty/{provider}/me:
     get:
       parameters:
-      - name: provider
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: provider
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/loyalty/{provider}/logout:
     get:
       parameters:
-      - name: provider
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: provider
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/loyalty/{provider}/token:
     get:
       parameters:
-      - name: provider
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: code_verifier
-        in: query
-        schema:
-          type: string
-      - name: code
-        in: query
-        schema:
-          type: string
+        - name: provider
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: code_verifier
+          in: query
+          schema:
+            type: string
+        - name: code
+          in: query
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /v2/profile/me:
     get:
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
-      
+        - coles_auth: []
+
   /index.php/api/content/colescataloguesproduct:
     get:
       parameters:
-      - name: apikey
-        in: query
-        schema:
-          type: string
-      - name: id
-        in: query
-        schema:
-          type: string
-      - name: format
-        in: query
-        schema:
-          type: string
-          default: njson
-          enum:
-          - njson
+        - name: apikey
+          in: query
+          schema:
+            type: string
+        - name: id
+          in: query
+          schema:
+            type: string
+        - name: format
+          in: query
+          schema:
+            type: string
+            default: njson
+            enum:
+              - njson
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
+        - coles_auth: []
 
   /index.php/api/sales/colescataloguesv2:
     get:
       parameters:
-      - name: apikey
-        in: query
-        schema:
-          type: string
-      - name: postcode
-        in: query
-        schema:
-          type: string
-      - name: storeId
-        in: query
-        schema:
-          $ref: '#/components/schemas/StoreId'
-      - name: format
-        in: query
-        schema:
-          type: string
-          enum:
-          - njson
-      - name: includeAll
-        in: query
-        schema:
-          type: integer
-          enum:
-          - 1
+        - name: apikey
+          in: query
+          schema:
+            type: string
+        - name: postcode
+          in: query
+          schema:
+            type: string
+        - name: storeId
+          in: query
+          schema:
+            $ref: '#/components/schemas/StoreId'
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum:
+              - njson
+        - name: includeAll
+          in: query
+          schema:
+            type: integer
+            enum:
+              - 1
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
+        - coles_auth: []
 
   /v2/trolley:
     get:
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
+        - coles_auth: []
 
   /v2/contact:
     get:
       responses:
-        200:
+        '200':
           description: Success
           content: {}
-        401:
+        '401':
           description: Invalid API Key
-          content: {}
-        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Missing API Key
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Invalid request or server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       security:
-      - coles_auth: []
+        - coles_auth: []
 
 components:
   schemas:
-    StoreId:
-      type: string
-
-    StoreType:
-      type: string
-      enum:
-      - "1" # Coles Express
-      - "2" # Coles
-
-    TradingHours:
+    Error:
       type: object
       properties:
-        daysOfWeek:
+        timestamp:
           type: string
-        storeTime:
+        status:
+          type: integer
+        path:
           type: string
-        isOpenNow:
-          type: boolean
-    
+
+    ProductSearchSuggestions:
+      type: object
+      properties:
+        noOfResults:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSearchSuggestion'
+
+    ProductSearchSuggestion:
+      type: object
+      properties:
+        text:
+          type: string
+
     Store:
       type: object
       properties:
@@ -865,7 +1137,26 @@ components:
                 type: string
               tradingHoursToday:
                 $ref: '#/components/schemas/TradingHours'
-    
+
+    StoreId:
+      type: string
+
+    StoreType:
+      type: string
+      enum:
+        - '1' # Coles Express
+        - '2' # Coles
+
+    TradingHours:
+      type: object
+      properties:
+        daysOfWeek:
+          type: string
+        storeTime:
+          type: string
+        isOpenNow:
+          type: boolean
+
   securitySchemes:
     coles_auth:
       type: apiKey
